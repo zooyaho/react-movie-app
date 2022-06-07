@@ -22,8 +22,6 @@ const Home = (props) => {
     getMovies();
   }, []);
 
-  console.log(movies);
-
   return (
     <div>
       {loading ? (
@@ -35,6 +33,7 @@ const Home = (props) => {
               // key는 react.js에서만, map안에서 component들을 render할 때 사용함.
               <Movie
                 key={movie.id}
+                id={movie.id}
                 coverImage={movie.medium_cover_image}
                 title={movie.title}
                 summary={movie.summary}
