@@ -11,11 +11,12 @@ const Detail = () => {
     ).json();
     setMovieInfo(json);
   };
-
+  
   useEffect(() => {
     getMovie();
   }, []);
-
+  
+  console.log(movieInfo);
   // const {background_image_original,title, year, description_full, genres } = movieInfo.data.movie;
   // console.log(background_image_original);
 
