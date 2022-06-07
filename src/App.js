@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Movie from "./components/Movie";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -40,16 +41,14 @@ function App() {
         <div>
           {movies.data.movies.map((movie) => {
             return (
-              <div key={movie.id}>
-                <img src={movie.medium_cover_image}/>
-                <h2>{movie.title}</h2>
-                <p>{movie.summary}</p>
-                <ul>
-                  {movie.genres.map((g) => {
-                    return <li key={g}>{g}</li>;
-                  })}
-                </ul>
-              </div>
+              // key는 react.js에서만, map안에서 component들을 render할 때 사용함.
+              <Movie
+                key={movie.id}
+                coverImage={movie.medium_cover_image}
+                title={movie.title}
+                summary={movie.summary}
+                genres={movie.genres}
+              />
             );
           })}
         </div>
