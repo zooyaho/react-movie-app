@@ -19,12 +19,10 @@ const Detail = () => {
     getMovie();
   }, []);
 
-  console.log(movieInfo);
-
   return (
     <div className={styles.container}>
       {loading ? (
-        <p>Loaging...</p>
+        <p>Loading...</p>
       ) : (
         <div className={styles.movie}>
           <img
