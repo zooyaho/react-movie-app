@@ -10,7 +10,7 @@ const Movie = ({ id, coverImage, title, year, summary, genres }) => {
       <img src={coverImage} alt={title} className={styles.movie__img} />
       <div>
         <h2 className={styles.movie__title}>
-          <Link to={`/movie/${id}`}>{title}</Link>
+          <Link to={`/movie/${id}`} state={{id:id}}>{title}</Link>
         </h2>
         <h3 className={styles.movie__year}>{year}</h3>
         <p>{summary.length > 235 ? `${summary.slice(0, 235)}...` : summary}</p>

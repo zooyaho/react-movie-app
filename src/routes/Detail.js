@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./Detail.module.css";
+import { fetchMovieDetail } from "./api";
+import { useQuery } from "react-query";
 
 const Detail = () => {
   const { id } = useParams();
-  const [loading, setLoading] = useState(true);
-  const [movieInfo, setMovieInfo] = useState([]);
+  const {isLoading , data:movieInfo} = useQuery("MovieInfo", ()=>fetchMovieDetail(id));
+  // const [loading, setLoading] = useState(true);
+  // const [movieInfo, setMovieInfo] = useState([]);
 
-  const getMovie = async () => {
-    const json = await (
-      await fetch(`https://yts.mx/api/v2/movie_details.json?movie_id=${id}`)
-    ).json();
-    setMovieInfo(json);
-    setLoading(false);
-  };
+  // const getMovie = async () => {
+  //   const json = await (
+  //     await fetch(`https://yts.mx/api/v2/movie_details.json?movie_id=${id}`)
+  //   ).json();
+  //   setMovieInfo(json);
+  //   setLoading(false);
+  // };
 
-  useEffect(() => {
-    getMovie();
-  }, []);
+  // useEffect(() => {
+  //   getMovie();
+  // }, []);
 
   return (
     <div className={styles.container}>
-      {loading ? (
+      {isLoading ? (
         <p>Loading...</p>
       ) : (
         <div className={styles.movie}>

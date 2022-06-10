@@ -1,38 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
+import { useQuery } from "react-query";
 import Movie from "../components/Movie";
-
 import styles from "./Home.module.css";
+import {fetchMovie} from './api';
 
 const Home = (props) => {
-  const [loading, setLoading] = useState(true);
-  const [movies, setMovies] = useState([]);
+  // const [loading, setLoading] = useState(true);
+  // const [movies, setMovies] = useState([]);
+  const {isLoading, data:movie} = useQuery("Movie",fetchMovie);
+  console.log(movie);
+  // const getMovies = async () => {
+  //   // 비동기 처리 async-await
+  //   const json = await (
+  //     await fetch(
+  //       "https://yts.mx/api/v2/list_movies.json?minimum_rating=8.8&sort_by=year"
+  //     )
+  //   ).json();
+  //   // await은 Promise 객체를 리턴하는 부분 앞에만 붙일 수 있음.
+  //   // const json = await response.json();
+  //   setMovies(json);
+  //   setLoading(false);
+  // };
 
-  const getMovies = async () => {
-    // 비동기 처리 async-await
-    const json = await (
-      await fetch(
-        "https://yts.mx/api/v2/list_movies.json?minimum_rating=8.8&sort_by=year"
-      )
-    ).json();
-    // await은 Promise 객체를 리턴하는 부분 앞에만 붙일 수 있음.
-    // const json = await response.json();
-    setMovies(json);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    getMovies();
-  }, []);
+  // useEffect(() => {
+  //   getMovies();
+  // }, []);
 
   return (
     <div className={styles.container}>
-      {loading ? (
+      {isLoading ? (
         <div className={styles.loader}>
           <span>Loading...</span>
         </div>
       ) : (
         <div className={styles.movies}>
-          {movies.data.movies.map((movie) => {
+          {movie.data.movies.map((movie) => {
             return (
               // key는 react.js에서만, map안에서 component들을 render할 때 사용함.
               <Movie
